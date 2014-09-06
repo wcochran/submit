@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>CS 330 Project Submission Form</title>
+</head>
+<body bgcolor="#44AA99">
+
+<center><h3>CS 330 Project Submission Form</h3></center>
+
+The following form is intended to allow for easy submission
+of programming projects for the 
+CS 330 Numerical Computing
+course.
+All the necessary files need to be archived into a single
+compressed archive file which is then submitted via this form.
+A compressed Unix tarball, using either <tt>compress</tt>
+or <tt>gzip</tt>, or a 
+<a href="http://en.wikipedia.org/wiki/ZIP_(file_format)">PKZIP</a> 
+file is acceptable. 
+To create a compressed tarball containing the files
+<tt>fred.c</tt> and <tt>wilma.h</tt> do the following:
+<pre>
+tar cvf - fred.c wilma.h | compress > f.tar.Z
+</pre>
+To create a gzipped tarball do the following:
+<!--
+<pre>
+tar cvf - fred.c wilma.h | gzip > f.tar.gz
+</pre>
+or perhaps the following will do the trick:
+-->
+<pre>
+tar czvf f.tar.gz fred.c wilma.h
+</pre>
+To create a .zip file under DOS/Win32, get a copy of 
+<a href="http://www.winzip.com/winzip">winzip</a>,
+<a href="http://www.pkware.com">PKZIP</a>,
+or find a shareware version somewhere. In Linux or OS X, you can do the
+following:
+<pre>
+zip f.zip fred.c wilma.h
+</pre>
+<!--
+If you are submitting a Java Archive (JAR) file you still need to
+archive it as above (I know this may seem redundant).
+-->
+
+<hr>
+
+<script language="JavaScript">
+function check_name() {
+  var s = document.submitform.name.value;
+  var n = s.length;
+  for (var i = 0; i < n; i++) {
+    var c = s.charAt(i);
+    if (("a" <= c && c <= "z") || ("A" <= c && c <= "Z"))
+      return true;
+  }
+  return false;
+}
+
+function check_sid() {
+  var s = document.submitform.sid.value;
+  var n = s.length;
+  if (n != 8)
+    return false;
+  for (var i = 0; i < n; i++) {
+    var c = s.charAt(i);
+    if (c < "0" || c > "9") return false;
+  }
+  return true;
+}
+
+var valid_extensions =  [".zip", ".ZIP", ".tar.gz", ".tar.Z"];
+
+function check_submission_ext() {
+  var s = document.submitform.submission.value;
+  var n = s.length;
+  for (var k = 0; k < valid_extensions.length; k++) {
+    var ext = valid_extensions[k];
+    var i = s.lastIndexOf(ext);
+    if (i >= 0 && n-i == ext.length)
+      return true;
+  }
+  return false;
+}
+
+function validate() {
+  if (!check_name()) {
+    alert("Invalid Name!");
+    return false;
+  }
+  if (!check_sid()) {
+    alert("Invalid Student ID!");
+    return false;
+  }
+  if (!check_submission_ext()) {
+    alert("Invalid file extension!");
+    return false;
+  }
+  return true;
+}
+</script>
+
+<form name="submitform" method="post"
+onsubmit="return validate()"
+action="http://ezekiel.vancouver.wsu.edu/~cs330/cgi-bin/submit.cgi"
+enctype="multipart/form-data">
+Name: <input type="text" name="name" size="32" maxlength="80"><br/>
+Student ID:<input type="text" name="sid" size="8" maxlength="8">
+(8 digits, ignore any leading zero)<br/>
+Assignment:
+<select name=assign size=1>
+<option>exp</option>
+<option>dk-method</option>
+<option>pi</option>
+<option>LU</option>
+<option>homography</option>
+<option>sudoku</option>
+<option>best-ellipse</option>
+<!--
+<option>matrix-mult</option>
+<option>unimodalroot</option>
+<option>LUdecomp</option>
+<option>chebyshev</option>
+<option>isqrt</option>
+<option>LUdecomp</option>
+<option>least-squares</option>
+<option>sudoku</option>
+-->
+</select><p>
+File: <input type="file" name="submission" size="32"
+       accept="application/zip, application/x-gzip"><br/>
+<input type="submit" value="Submit File"> 
+</form>
+
+<hr>
+<i>
+Wayne O. Cochran<br>
+<a href="mailto:wcochran@vancouver.wsu.edu">wcochran@vancouver.wsu.edu</a><br>
+November 4, 2013
+</i>
+
+</body>
+</html>
