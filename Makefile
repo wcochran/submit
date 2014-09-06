@@ -1,6 +1,5 @@
 CC=gcc
-#COPTS=-ansi -pedantic -Wall -D_XOPEN_SOURCE
-COPTS=-ansi -Wall -D_XOPEN_SOURCE
+COPTS= -Wall -D_XOPEN_SOURCE
 
 all: submit.cgi
 

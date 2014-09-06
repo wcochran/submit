@@ -206,7 +206,7 @@ FORM_TYPE parseFormHeader(char *str, char *fname) {
 int main(int argc, char *argv[]) {
   FORM_TYPE type;
   static char msg[50];
-  int i, fd;
+  int i, fd, lfd;
   FILE *f, *ftmp;
   char *tmp_fname = NULL;
   char *ext;
@@ -413,10 +413,25 @@ int main(int argc, char *argv[]) {
   fclose(f);
   fclose(ftmp);
 
+  lfd = open("../submissions/log", O_CREAT | O_WRONLY | O_APPEND, 0700);
+  if (lfd < 0) {
+    unlink(tmp_fname);
+    fatalError("Unable to open log file.");
+  }
+
+  if ((f = fdopen(lfd, "a")) == NULL) {
+    unlink(tmp_fname);
+    fatalError("Unable to open log file (from file desc).");
+  }
+
+  /* XXX
   if ((f = fopen("../submissions/log","a")) == NULL) {
     unlink(tmp_fname);
     fatalError("Unable to open log file.");
   }
+  */
+
+  
 
   time(&tp);
   timeStamp = ctime(&tp);
