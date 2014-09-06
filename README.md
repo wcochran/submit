@@ -31,14 +31,13 @@
 
     mkdir ~/Sites/submissions
 
-  4. Create (empty) log file with correct permissions
-
-    touch ~/Sites/submissions/log
-    chmod 700 ~/Sites/submissions/log
+  4. Edit defines at top of `submit.c` (`CLASS_NAME`, etc...)
 
   5. Build/install cgi program  (must be in `~/Sites/submit` dir)
 
     make
+
+  6. Edit `submit.html`
 
 # Files
   

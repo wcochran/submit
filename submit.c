@@ -14,18 +14,23 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#define CLASS_NAME "CS 330"
+#define NAME "Wayne O. Cochran"
+#define EMAIL "wcochran@vancouver.wsu.edu"
+#define MAX_CONTENT_LENGTH 1e6L
+
 static void fatalError(char *message) {
   printf("Content-type: text/html\n");
   printf("\n");
   printf("<html>\n");
   printf("<head>\n");
-  printf("<title>CS 330 Submission Fatal Error!</title>\n");
+  printf("<title>%s Submission Fatal Error!</title>\n", CLASS_NAME);
   printf("</head>\n");
   printf("<body>\n");
-  printf("<h3>CS 330 Submission Fatal Error!</h3><p>\n");
+  printf("<h3>%s Submission Fatal Error!</h3><p>\n", CLASS_NAME);
   printf("message: <i>%s</i>\n<br>", message);
-  printf("Please contact <a href=\"mailto:cochran@vancouver.wsu.edu\">");
-  printf("Wayne Cochran (cochran@vancouver.wsu.edu)</a> for assistance.\n");
+  printf("Please contact <a href=\"mailto:%s\">", EMAIL);
+  printf("%s (%s)</a> for assistance.\n", NAME, EMAIL);
   printf("Write down the error message printed above.\n");
   printf("</body>\n");
   printf("</html>\n");
@@ -37,13 +42,13 @@ static void error(char *message) {
   printf("\n");
   printf("<html>\n");
   printf("<head>\n");
-  printf("<title>CS 330 Submission failed :(</title>\n");
+  printf("<title>%s Submission failed :(</title>\n", CLASS_NAME);
   printf("</head>\n");
   printf("<body>\n");
-  printf("<h3>CS 330 Submission failed :(</h3><p>\n");
+  printf("<h3>%s Submission failed :(</h3><p>\n", CLASS_NAME);
   printf("Reason: <i>%s</i>\n<br>", message);
-  printf("Please contact <a href=\"mailto:cochran@vancouver.wsu.edu\">");
-  printf("Wayne Cochran (cochran@vancouver.wsu.edu)</a> for assistance.\n");
+  printf("Please contact <a href=\"mailto:%s\">", EMAIL);
+  printf("%s (%s)</a> for assistance.\n", NAME, EMAIL);
   printf("</body>\n");
   printf("</html>\n");
   exit(1);
@@ -56,10 +61,10 @@ static void success(char *name, char *id, char *assign,
   printf("\n");
   printf("<html>\n");
   printf("<head>\n");
-  printf("<title>CS 330 Submission Successful!</title>\n");
+  printf("<title>%s Submission Successful!</title>\n", CLASS_NAME);
   printf("</head>\n");
   printf("<body>\n");
-  printf("<h3>CS 330 Submission Successful!</h3><p>\n");
+  printf("<h3>%s Submission Successful!</h3><p>\n", CLASS_NAME);
   printf("Name: <i>%s</i>\n<br>",name);
   printf("ID: <i>%s</i>\n<br>", id);
   printf("Assignment: <i>%s</i>\n<br>", assign);
@@ -67,9 +72,9 @@ static void success(char *name, char *id, char *assign,
   printf("Local File Name: <i>%s</i>\n<br>", local_fname);
   printf("Time Stamp: <i>%s</i>\n<p>", timestamp);
   printf("<hr>\n");
-  printf("<a href=\"mailto:cochran@vancouver.wsu.edu\">");
-  printf("Wayne O. Cochran</a><br>\n");
-  printf("<i>September 4, 2013</i>\n");
+  printf("<a href=\"mailto:%s\">", EMAIL);
+  printf("%s</a><br>\n", NAME);
+  printf("<i>%s %s</i>\n", __DATE__, __TIME__);
   printf("</body>\n");
   printf("</html>\n");
 }
@@ -229,10 +234,8 @@ int main(int argc, char *argv[]) {
   if ((env = getenv("CONTENT_LENGTH")) == NULL)
     fatalError("No environment variable CONTENT_LENGTH.");
   contentLength = atol(env);
-  /* XXXX
-  if (contentLength > 4e6L)
+  if (contentLength > MAX_CONTENT_LENGTH)
     error("Submission too dang big!");  
-  */
   if (contentLength < 200)
     error("Submission too small -- check your archive!");
 
@@ -423,15 +426,6 @@ int main(int argc, char *argv[]) {
     unlink(tmp_fname);
     fatalError("Unable to open log file (from file desc).");
   }
-
-  /* XXX
-  if ((f = fopen("../submissions/log","a")) == NULL) {
-    unlink(tmp_fname);
-    fatalError("Unable to open log file.");
-  }
-  */
-
-  
 
   time(&tp);
   timeStamp = ctime(&tp);
