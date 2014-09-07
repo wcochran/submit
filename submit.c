@@ -106,6 +106,27 @@ static int validSID(char *sid) {
   return (i < 9);
 }
 
+static int checkSID(char *sid) {
+  FILE *f = fopen("../submissions/crypt.txt", "r");
+  if (f == NULL)
+    return 1;   /* no encrypted list, let everyone in */
+  static char buf[100];
+  while (fgets(buf, sizeof(buf), f) != NULL && strlen(buf) > 10) {
+    char salt[3];
+    char *cypher;
+    strtok(buf,"\n");  /* chop off linefeed */
+    strncpy(salt, buf, 2);
+    salt[2] = '\0';
+    cypher = crypt(sid, salt);
+    if (strcmp(buf, cypher) == 0) {
+      fclose(f);
+      return 1;  /* found */
+    }
+  }
+  fclose(f);
+  return 0; /* not found */
+}
+
 static int validName(char *name) {
   int i, nonwhite;
   for (i = nonwhite = 0; name[i] != '\0'; i++)
@@ -280,6 +301,10 @@ int main(int argc, char *argv[]) {
       strncpy(info.sid,buf,MAXSID+1);
       if (!validSID(info.sid)) {
 	sprintf(msg, "The ID number '%s' is not valid.", info.sid);
+	error(msg);
+      }
+      if (!checkSID(info.sid)) {
+	sprintf(msg, "No student with ID number '%s' is enrolled.", info.sid);
 	error(msg);
       }
       got |= GOTSID;
