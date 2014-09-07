@@ -37,9 +37,14 @@
 
     make
 
-  6. Edit `submit.html`
+  6. Create list of possible projects in `../submissions/projects.txt`
 
-  7. Add encrypted list of SID's (if you wish to force this check)
+  7. Edit `submit.html`
+
+       - List of project options should be a subset of 
+         `../submissions/projects.txt`.
+
+  8. Add encrypted list of SID's (if you wish to force this check)
 
       # download class roster (call it `roster.html`) from zzusis
       ./roster.pl < roster.html > roster.csv

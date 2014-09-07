@@ -108,9 +108,9 @@ static int validSID(char *sid) {
 
 static int checkSID(char *sid) {
   FILE *f = fopen("../submissions/sidcrypt.txt", "r");
+  static char buf[100];
   if (f == NULL)
     return 1;   /* no encrypted list, let everyone in */
-  static char buf[100];
   while (fgets(buf, sizeof(buf), f) != NULL && strlen(buf) > 10) {
     char salt[3];
     char *cypher;
@@ -119,6 +119,22 @@ static int checkSID(char *sid) {
     salt[2] = '\0';
     cypher = crypt(sid, salt);
     if (strcmp(buf, cypher) == 0) {
+      fclose(f);
+      return 1;  /* found */
+    }
+  }
+  fclose(f);
+  return 0; /* not found */
+}
+
+static int checkAssign(char *assign_name) {
+  FILE *f = fopen("../submissions/projects.txt", "r");
+  static char buf[100];
+  if (f == NULL)
+    fatalError("Unable to open projects.txt\n");     
+  while (fgets(buf, sizeof(buf), f) != NULL && strlen(buf) > 0) {
+    strtok(buf,"\n");  /* chop off linefeed */
+    if (strcmp(assign_name,buf) == 0) {
       fclose(f);
       return 1;  /* found */
     }
@@ -311,10 +327,14 @@ int main(int argc, char *argv[]) {
       break;
     case FORM_ASSIGN:
       if (fgets(buf, BUFSIZE, stdin) == NULL)
-	fatalError("Unexpected end of input. Expecting Assignment number.");
+	fatalError("Unexpected end of input. Expecting assignment name.");
       strtok(buf,"\r\n");      
       strncpy(info.assign,buf,MAXASSIGN+1);
       removeWhiteSpace(info.assign);
+      if (!checkAssign(info.assign)) {
+	sprintf(msg, "No project named '%s'.", info.assign);
+	error(msg);
+      }
       got |= GOTASSIGN;
       break;
     case FORM_SUBMISSION: 
