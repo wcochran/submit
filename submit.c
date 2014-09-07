@@ -107,7 +107,7 @@ static int validSID(char *sid) {
 }
 
 static int checkSID(char *sid) {
-  FILE *f = fopen("../submissions/crypt.txt", "r");
+  FILE *f = fopen("../submissions/sidcrypt.txt", "r");
   if (f == NULL)
     return 1;   /* no encrypted list, let everyone in */
   static char buf[100];

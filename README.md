@@ -39,6 +39,14 @@
 
   6. Edit `submit.html`
 
+  7. Add encrypted list of SID's (if you wish to force this check)
+
+      # download class roster (call it `roster.html`) from zzusis
+      ./roster.pl < roster.html > roster.csv
+      chmod 600 roster.csv  # don't let others see this
+      ./sidcrypt < roster.csv > ../submissions/sidcrypt.txt
+      chmod 600 ../submissions/sidcrypt.txt  # good idea
+
 # Files
   
   * `Makefile` : build's cgi program (assumes `../cgi-bin` exists)
