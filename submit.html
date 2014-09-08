@@ -1,12 +1,38 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" />
+<title>CS 330 Project Submission Form</title>
 <style>
 body {
   background-color: #44AA99;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size: 1.5em;
+}
+h2 {
+  font-size: 1.25em;
+}
+tt {
+  font-family: "Lucida Console", Monaco, monospace;
+}
+pre {
+  font-family: "Lucida Console", Monaco, monospace;
+}
+label {
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px 6px;
+  text-align: right;
+  width: 150px;
+  vertical-align: top
+}
+footer {
+  font-size: 0.9em;
+  font-style: italic;
 }
 </style>
-<title>CS 330 Project Submission Form</title>
 <script language="JavaScript">
 function check_name() {
   var s = document.submitform.name.value;
@@ -31,7 +57,7 @@ function check_sid() {
   return true;
 }
 
-var valid_extensions =  [".zip", ".ZIP", ".tar.gz", ".tar.Z"];
+var valid_extensions =  [".zip", ".ZIP", ".jar", ".JAR", ".tar.gz", ".tar.Z"];
 
 function check_submission_ext() {
   var s = document.submitform.submission.value;
@@ -69,32 +95,35 @@ function validate() {
 <p>
 The following form is intended to allow for easy submission
 of programming projects for the 
-CS 330 Numerical Computing
+CS 330 <em>Numerical Computing</em>
 course.
 All the necessary files need to be archived into a single
 compressed archive file which is then submitted via this form.
-A compressed Unix tarball, using either <tt>compress</tt>
-or <tt>gzip</tt>, or a 
-<a href="http://en.wikipedia.org/wiki/ZIP_(file_format)">PKZIP</a> 
-file is acceptable. 
-To create a compressed tarball containing the files
-<tt>fred.c</tt> and <tt>wilma.h</tt> do the following:
+The following file formats are acceptable:
+<ul>
+<li> <a href="http://en.wikipedia.org/wiki/Gzip">GZIP</a>'ed 
+     <a href="http://en.wikipedia.org/wiki/Tar_(computing)">TAR</a> file (<tt>.tar.gz</tt>),  </li>
+<li> <a href="http://en.wikipedia.org/wiki/ZIP_(file_format)">ZIP</a> (<tt>.zip</tt>), </li>
+<li> <a href="http://en.wikipedia.org/wiki/JAR_(file_format)">JAR</a> (<tt>.tar</tt>). </li>
+</ul>
+</p>
+
+<p>
+From a UNIX shell you can do one of the following:
+<ul>
+<li> To create a gzipped tarball named <tt>f.tar.gz</tt>:
 <pre>
-tar cvf - fred.c wilma.h | compress > f.tar.Z
-</pre>
-To create a gzipped tarball do the following:
+tar czvf f.tar.gz fred.c wilma.h README
+</pre> </li>
+<li> To create a .zip file named <tt>f.zip</tt>:
 <pre>
-tar czvf f.tar.gz fred.c wilma.h
-</pre>
-To create a .zip file in Linux or OS X, you can do the
-following:
+zip f.zip fred.c wilma.h README
+</pre> </li>
+<li> To create a Java Archive (JAR) file named <tt>f.jar</tt>:
 <pre>
-zip f.zip fred.c wilma.h
-</pre>
-<!--
-If you are submitting a Java Archive (JAR) file you still need to
-archive it as above (I know this may seem redundant).
--->
+jar f.jar fred.java wilma.java README
+</pre> </li>
+</ul>
 </p>
 
 <p>
@@ -103,24 +132,26 @@ archive it as above (I know this may seem redundant).
     action="https://bend.encs.vancouver.wsu.edu/~cs330/cgi-bin/submit.cgi"
    enctype="multipart/form-data">
 <fieldset>
+<!-- <h2>File Submission</h2> -->
  <p>
- <label for="name">Name:</label> 
- <input type="text" id="name" name="name" 
+ <label for="name">NAME:</label> 
+ <input type="text" id="name" name="name" autofocus="autofocus"
         size="32" maxlength="80" required="required"/>
  </p>
  <p>
- <label for="sid">Student ID (8 digits, ignore any leading zero):</label>
+ <label for="sid">STUDENT ID:</label>
  <input type="text" id="sid" name="sid" 
         size="8" maxlength="8" required="required" placeholder="12345678"/>
+        <em>(8 digits, no leading zero)</em>
  </p>
  <p>
- <label for="assign">Assignment:</label>
+ <label for="assign">ASSIGNMENT:</label>
  <select id="assign" name="assign" size=1>
    <option>exp</option>
  </select>
  </p>
  <p>
- <label for="submission">File:</label> 
+ <label for="submission">FILE:</label> 
  <input type="file" id="submission" name="submission" size="32"
        accept="application/zip, application/octet-stream, application/x-gzip, application/java-archive"/>
  </p>
