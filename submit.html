@@ -7,42 +7,6 @@ body {
 }
 </style>
 <title>CS 330 Project Submission Form</title>
-</head>
-<body>
-
-<center><h3>CS 330 Project Submission Form</h3></center>
-
-The following form is intended to allow for easy submission
-of programming projects for the 
-CS 330 Numerical Computing
-course.
-All the necessary files need to be archived into a single
-compressed archive file which is then submitted via this form.
-A compressed Unix tarball, using either <tt>compress</tt>
-or <tt>gzip</tt>, or a 
-<a href="http://en.wikipedia.org/wiki/ZIP_(file_format)">PKZIP</a> 
-file is acceptable. 
-To create a compressed tarball containing the files
-<tt>fred.c</tt> and <tt>wilma.h</tt> do the following:
-<pre>
-tar cvf - fred.c wilma.h | compress > f.tar.Z
-</pre>
-To create a gzipped tarball do the following:
-<pre>
-tar czvf f.tar.gz fred.c wilma.h
-</pre>
-To create a .zip file in Linux or OS X, you can do the
-following:
-<pre>
-zip f.zip fred.c wilma.h
-</pre>
-<!--
-If you are submitting a Java Archive (JAR) file you still need to
-archive it as above (I know this may seem redundant).
--->
-
-<hr>
-
 <script language="JavaScript">
 function check_name() {
   var s = document.submitform.name.value;
@@ -97,45 +61,81 @@ function validate() {
   return true;
 }
 </script>
+</head>
+<body>
 
-<form name="submitform" method="post"
-onsubmit="return validate()"
-action="https://bend.encs.vancouver.wsu.edu/~cs330/cgi-bin/submit.cgi"
-enctype="multipart/form-data">
-Name: <input type="text" name="name" size="32" maxlength="80"/><br/>
-Student ID:<input type="text" name="sid" size="8" maxlength="8"/>
-(8 digits, ignore any leading zero)<br/>
-Assignment:
-<select name=assign size=1>
-<option>exp</option>
-<option>dk-method</option>
-<option>pi</option>
-<option>LU</option>
-<option>homography</option>
-<option>sudoku</option>
-<option>best-ellipse</option>
+<h1>CS 330 Project Submission Form</h1>
+
+<p>
+The following form is intended to allow for easy submission
+of programming projects for the 
+CS 330 Numerical Computing
+course.
+All the necessary files need to be archived into a single
+compressed archive file which is then submitted via this form.
+A compressed Unix tarball, using either <tt>compress</tt>
+or <tt>gzip</tt>, or a 
+<a href="http://en.wikipedia.org/wiki/ZIP_(file_format)">PKZIP</a> 
+file is acceptable. 
+To create a compressed tarball containing the files
+<tt>fred.c</tt> and <tt>wilma.h</tt> do the following:
+<pre>
+tar cvf - fred.c wilma.h | compress > f.tar.Z
+</pre>
+To create a gzipped tarball do the following:
+<pre>
+tar czvf f.tar.gz fred.c wilma.h
+</pre>
+To create a .zip file in Linux or OS X, you can do the
+following:
+<pre>
+zip f.zip fred.c wilma.h
+</pre>
 <!--
-<option>matrix-mult</option>
-<option>unimodalroot</option>
-<option>LUdecomp</option>
-<option>chebyshev</option>
-<option>isqrt</option>
-<option>LUdecomp</option>
-<option>least-squares</option>
-<option>sudoku</option>
+If you are submitting a Java Archive (JAR) file you still need to
+archive it as above (I know this may seem redundant).
 -->
-</select><p>
-File: <input type="file" name="submission" size="32"
-       accept="application/zip, application/x-gzip"/ ><br/>
-<input type="submit" value="Submit File" /> 
-</form>
+</p>
 
-<hr>
-<i>
+<p>
+<form name="submitform" method="post"
+  onsubmit="return validate()"
+    action="https://bend.encs.vancouver.wsu.edu/~cs330/cgi-bin/submit.cgi"
+   enctype="multipart/form-data">
+<fieldset>
+ <p>
+ <label for="name">Name:</label> 
+ <input type="text" id="name" name="name" 
+        size="32" maxlength="80" required="required"/>
+ </p>
+ <p>
+ <label for="sid">Student ID (8 digits, ignore any leading zero):</label>
+ <input type="text" id="sid" name="sid" 
+        size="8" maxlength="8" required="required" placeholder="12345678"/>
+ </p>
+ <p>
+ <label for="assign">Assignment:</label>
+ <select id="assign" name="assign" size=1>
+   <option>exp</option>
+ </select>
+ </p>
+ <p>
+ <label for="submission">File:</label> 
+ <input type="file" id="submission" name="submission" size="32"
+       accept="application/zip, application/octet-stream, application/x-gzip, application/java-archive"/>
+ </p>
+ <p>
+ <input type="submit" value="Submit File" /> 
+ </p>
+</fieldset>
+</form>
+</p>
+
+<footer>
 Wayne O. Cochran<br>
-<a href="mailto:wcochran@vancouver.wsu.edu">wcochran@vancouver.wsu.edu</a><br>
-November 4, 2013
-</i>
+<a href="mailto:wcochran@vancouver.wsu.edu">wcochran@vancouver.wsu.edu</a><br/>
+September 8, 2014
+</footer> 
 
 </body>
 </html>

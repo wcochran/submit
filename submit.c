@@ -408,7 +408,8 @@ int main(int argc, char *argv[]) {
   goodext = 0;
 
   if((ext = strrchr(info.fname,'.')) != NULL) {
-    if (strcmp(".zip", ext) == 0 || strcmp(".ZIP", ext) == 0)
+    if (strcmp(".zip", ext) == 0 || strcmp(".ZIP", ext) == 0 ||
+	strcmp(".jar", ext) == 0 || strcmp(".JAR", ext) == 0)
       goodext = 1;
     else {
       while (ext > info.fname && *(--ext) != '.')
@@ -420,7 +421,8 @@ int main(int argc, char *argv[]) {
 
   if (!goodext) {
     unlink(tmp_fname);
-    error("Submitted file must have a '.tar.{Z,gz}' or '.zip' extension.");
+    error("Submitted file must have a " 
+	  "'.tar.gz', '.zip', or '.jar'  extension.");
   }
 
   sprintf(dirbuf,"../submissions/%s", info.assign);
