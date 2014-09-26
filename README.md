@@ -56,4 +56,7 @@
   
   * `Makefile` : build's cgi program (assumes `../cgi-bin` exists)
   * `submit.c` : cgi source code
-  * `submit.html` : html source with proper form element
+  * `submit.html` : html source with proper form elements
+  * `roster.pl` : builds CSV file from roster downloaded via zzusis
+  * `sidcrypt.pl` : encrypts student ID's for form verification
+  * `sidhash.pl` : hashes student ID's for anonymous score posting
