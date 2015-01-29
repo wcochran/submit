@@ -42,7 +42,6 @@
   5. Build/install cgi program  (must be in `~/Sites/submit` dir)
 
 ```
-    mkdir ~/Sites/cgi-bin  # unless it exists already
     make
 ```
 
