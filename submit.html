@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>CS 330 Project Submission Form</title>
+<title>CS 223 Project Submission Form</title>
 <style>
 body {
   background-color: #44AA99;
@@ -90,12 +90,12 @@ function validate() {
 </head>
 <body>
 
-<h1>CS 330 Project Submission Form</h1>
+<h1>CS 223 Project Submission Form</h1>
 
 <p>
 The following form is intended to allow for easy submission
 of programming projects for the 
-CS 330 <em>Numerical Computing</em>
+CS 223 <em>Advanced Data Structures</em>
 course.
 All the necessary files need to be archived into a single
 compressed archive file which is then submitted via this form.
@@ -139,7 +139,7 @@ jar f.jar fred.java wilma.java README
 <p>
 <form name="submitform" method="post"
   onsubmit="return validate()"
-    action="https://bend.encs.vancouver.wsu.edu/~cs330/cgi-bin/submit.cgi"
+    action="https://ezekiel.encs.vancouver.wsu.edu/~cs223/cgi-bin/submit.cgi"
    enctype="multipart/form-data">
 <fieldset>
 <!-- <h2>File Submission</h2> -->
@@ -157,7 +157,13 @@ jar f.jar fred.java wilma.java README
  <p>
  <label for="assign">ASSIGNMENT:</label>
  <select id="assign" name="assign" size=1>
-   <option>exp</option>
+   <option>random-bst</option>
+   <!--
+   <option>memoization</option>
+   <option>hash-frequency-table</option>
+   <option>maze-gen</option>
+   <option>pri-queue</option>
+   -->
  </select>
  </p>
  <p>
@@ -174,8 +180,8 @@ jar f.jar fred.java wilma.java README
 
 <footer>
 Wayne O. Cochran<br>
-<a href="mailto:wcochran@vancouver.wsu.edu">wcochran@vancouver.wsu.edu</a><br/>
-September 8, 2014
+<a href="mailto:wcochran@wsu.edu">wcochran@wsu.edu</a><br/>
+September 14, 2016
 </footer> 
 
 </body>

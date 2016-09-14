@@ -14,9 +14,9 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define CLASS_NAME "CS 330"
+#define CLASS_NAME "CS 223"
 #define NAME "Wayne O. Cochran"
-#define EMAIL "wcochran@vancouver.wsu.edu"
+#define EMAIL "wcochran@wsu.edu"
 #define MAX_CONTENT_LENGTH 1e6L
 
 static void fatalError(char *message) {
